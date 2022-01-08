@@ -1,0 +1,1 @@
+export {TimeTable} from 'src/components/time-table/time-table';
