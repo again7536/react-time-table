@@ -1,0 +1,14 @@
+.time-table-container {
+    position:relative;
+    display:flex;
+    flex-direction: row;
+}
+
+.time-table-column {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.time-table-cell:nth-child(odd) {
+    background-color: #CCCCCC;
+}
