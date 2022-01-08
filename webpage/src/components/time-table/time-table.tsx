@@ -12,8 +12,9 @@ const TimeTable:React.FC<TimeTableProps> = ({
     height,
     width,
     blockMap,
-    onCreateBlock,
-    onChangeBlock,
+    onDoubleClick,
+    onDropBlock,
+    onDragStartBlock
 }) => {
     const [dragCol, setDragCol] = useState<number>(0);
     const [dragRow, setDragRow] = useState<number>(0);
@@ -40,20 +41,8 @@ const TimeTable:React.FC<TimeTableProps> = ({
     }, []);
 
     const addBlock = (row:number, col:number) => {
-        onCreateBlock(row, col);
-        // setBlocks(state => {
-        //     const key = `${row}-${col}`
-        //     const ret = {...state};
-        //     // this sets default block
-        //     //@ts-ignore
-        //     ret[key] = {
-        //         height:24, 
-        //         block:blockRenderer?
-        //             blockRenderer
-        //             :<Block height={24} style={{backgroundColor:'red'}}/>    
-        //         }
-        //     return ret;
-        // });
+        onDoubleClick(row, col);
+
         setUsedTime(state=> {
             const ret = [...state];
             for(let i=1;i<24;i++)
@@ -65,21 +54,14 @@ const TimeTable:React.FC<TimeTableProps> = ({
     const handleDragStart = (e:React.DragEvent, row:number, col:number) => {
         setDragRow(row);
         setDragCol(col);
+        if(onDragStartBlock)
+            onDragStartBlock(row, col);
     }
 
     const handleDrop = (e:React.DragEvent, row:number, col:number) => {
         e.preventDefault();
 
-        onChangeBlock(dragRow, dragCol, row, col);
-        // setBlocks(state => {
-        //     const key = `${dragRow}-${dragCol}`
-        //     const newKey = `${row}-${col}`
-        //     const ret = {...state};
-        //     ret[newKey] = {...ret[key]};
-
-        //     delete ret[key];
-        //     return ret;
-        // });
+        onDropBlock(dragRow, dragCol, row, col);
 
         setUsedTime(state=> {
             const ret = [...state];

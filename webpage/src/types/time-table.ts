@@ -8,8 +8,8 @@ export interface TableBlockProps{
 }
 export type TableBlock = React.ReactElement<TableBlockProps>;
 export interface TableBlockMap{
-    [row:string|number]: {
-        [col:string|number]: TableBlock;
+    [row:number]: {
+        [col:number]: TableBlock;
     }
 }
 
@@ -34,6 +34,7 @@ export interface TimeTableProps {
     width: number;
     height: number;
     blockMap: TableBlockMap;
-    onCreateBlock:(row:number, col:number)=>void;
-    onChangeBlock:(row:number, col:number, newRow:number, newColumn:number)=>void;
+    onDoubleClick:(row:number, col:number)=>void;
+    onDropBlock:(row:number, col:number, newRow:number, newColumn:number)=>void;
+    onDragStartBlock?:(row:number, col:number)=>void
 }
