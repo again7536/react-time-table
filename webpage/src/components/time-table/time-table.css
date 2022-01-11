@@ -1,13 +1,21 @@
+/*  structure...
+    table - row  - cell
+          - grid - cell
+*/
+
+/* common */
+.time-table-row-header, .time-table-cell, .time-table-col-header{
+    padding: 0 10px;
+}
+
+/* time table */
 .time-table-container {
     position:relative;
     border-collapse: collapse;
 }
 .time-table-container thead tr {
-    border-bottom:1px solid black;
-}
-
-.time-table-row-header, .time-table-cell, .time-table-col-header{
-    padding: 0 10px;
+    box-sizing: border-box;
+    border-bottom:1px outset black;
 }
 
 /* time table col */
@@ -15,45 +23,24 @@
     text-align: center;
 }
 
-/* time table cell */
-.time-table-cell, .time-table-cell-hover {
-    text-align: right;
-    min-height:1px;
-    height:4px;
-}
-.time-table-cell-hover {
-    border-top: 2px blue solid;
-}
-
 /* time table grid */
 .time-table-grid{
     background-color: transparent;
-    min-height:1px;
-    height:4px;
+    height:1px;
 }
 .time-table-grid .time-table-cell{
+    box-sizing: border-box;
     background-color: transparent;
 }
 
 /* time table row */
 .time-table-row{
     border-bottom:1px solid black;
+    height:1px;
 }
 .time-table-row-header {
     text-align:right;
-    height:48px;
 }
 .time-table-row .time-table-cell{
-    height:3px;
-    position:relative;
+    box-sizing: border-box;
 }
-.time-table-row .time-table-cell .time-table-cell-hidden {
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-}
-.time-table-row .time-table-cell .time-table-cell-hidden:hover {
-    background-color: #000000;
-}
-

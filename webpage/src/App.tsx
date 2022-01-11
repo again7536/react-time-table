@@ -15,21 +15,47 @@ function App() {
   return (
     <div>
       <TimeTable
-        timeSlice={60}
+        rowGrid={20}
         height={800}
         width={800}
+        rows={[
+          {
+            key:'1:00',
+          },
+          {
+            key:'2:00',
+          },
+          {
+            key:'3:00',
+          },
+          {
+            key:'4:00',
+          }
+        ]}
         columns={[ 
           {
             key:'monday',
+            header: {
+              width:'200'
+            }
           },
           {
             key:'tuesday',
+            header: {
+              width:'200'
+            }
           },
           {
             key:'wednesday',
+            header: {
+              width:'200'
+            }
           },
           {
             key:'thursday',
+            header: {
+              width:'200'
+            }
           },
         ]}
         blockMap={blockMap}

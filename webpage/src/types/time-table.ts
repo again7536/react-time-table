@@ -18,16 +18,18 @@ export interface TableBlockConfig{
 
 }
 
+/* row */
+export interface TimeTableRow{
+    key:string;
+    header?: React.TdHTMLAttributes<HTMLTableCellElement>
+    grid?: React.TdHTMLAttributes<HTMLTableCellElement>
+}
+
 /* table */
 export interface TimeTableColumn {
     key: string;
-    header?: {
-        [x: string]:any;
-    }
-    cell?: {
-        [x: string]:any;
-    }
-    
+    header?: React.TdHTMLAttributes<HTMLTableCellElement>
+    cell?: React.TdHTMLAttributes<HTMLTableCellElement>
 }
 export interface TimeTableColumnProps {
     key: string;
@@ -36,13 +38,14 @@ export interface TimeTableColumnProps {
     timeColumn?: boolean;
 }
 export interface TimeTableProps {
-    timeSlice: number;
+    rowGrid: number;
     columns: TimeTableColumn[];
+    rows:TimeTableRow[];
     width: number;
     height: number;
     blockMap: TableBlockMap;
     usedTime: number[][];
-    onDoubleClick:(row:number, col:number)=>void;
-    onDropBlock:(row:number, col:number, newRow:number, newColumn:number)=>void;
+    onDoubleClick?:(row:number, col:number)=>void;
+    onDropBlock?:(row:number, col:number, newRow:number, newColumn:number)=>void;
     onDragStartBlock?:(row:number, col:number)=>void
 }
