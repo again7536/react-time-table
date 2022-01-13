@@ -1,6 +1,6 @@
 import './App.css';
 import { Block } from './components/block/block';
-import {TimeTable} from './components/time-table/time-table'
+import { TimeTable } from './components/time-table/time-table'
 import { useBlock } from './hooks/useBlock';
 
 function App() {
@@ -23,43 +23,13 @@ function App() {
           {
             key:'2:00',
           },
-          {
-            key:'3:00',
-          },
-          {
-            key:'4:00',
-          }
         ]}
         columns={[ 
           {
             key:'monday',
-            header: {
-              width:'200',
-            }
           },
           {
             key:'tuesday',
-            header: {
-              width:'200'
-            }
-          },
-          {
-            key:'wednesday',
-            header: {
-              width:'200'
-            }
-          },
-          {
-            key:'thursday',
-            header: {
-              width:'200'
-            }
-          },
-          {
-            key:'friday',
-            header: {
-              width:'200'
-            }
           },
         ]}
         blockMap={blockMap}
@@ -70,7 +40,6 @@ function App() {
         onDropBlock={(row, col, newRow, newCol)=> {
           moveBlock(row, col, newRow, newCol);
         }}
-        style={{height:800}}
       />
     </div>
   );
