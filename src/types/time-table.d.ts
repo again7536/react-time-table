@@ -1,9 +1,8 @@
 import React from "react";
 
 /* table block */
-export interface TableBlockProps{
+export interface TableBlockProps extends React.TdHTMLAttributes<HTMLTableCellElement>{
     height:number;
-    style?: React.CSSProperties;
     [x:string]:any;
 }
 export type TableBlock = React.ReactElement<TableBlockProps>;
@@ -11,11 +10,6 @@ export interface TableBlockMap{
     [row:number]: {
         [col:number]: TableBlock;
     }
-}
-
-/* block config */
-export interface TableBlockConfig{
-
 }
 
 /* row */
@@ -37,15 +31,13 @@ export interface TimeTableColumnProps {
     timeLine: number[];
     timeColumn?: boolean;
 }
-export interface TimeTableProps {
+export interface TimeTableProps extends React.TableHTMLAttributes<HTMLTableElement>{
     rowGrid: number;
     columns: TimeTableColumn[];
     rows:TimeTableRow[];
-    width: number;
-    height: number;
     blockMap: TableBlockMap;
     usedTime: number[][];
-    onDoubleClick?:(row:number, col:number)=>void;
+    onDoubleClickGrid?:(row:number, col:number)=>void;
     onDropBlock?:(row:number, col:number, newRow:number, newColumn:number)=>void;
-    onDragStartBlock?:(row:number, col:number)=>void
+    onDragStartBlock?:(row:number, col:number)=>void,
 }

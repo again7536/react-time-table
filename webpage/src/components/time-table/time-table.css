@@ -1,11 +1,17 @@
 /*  structure...
-    table - row  - cell
-          - grid - cell
+    
+    table :        col  col  col  (col-header)
+                -----------------
+            row | cell cell cell
+            row | cell cell cell
+            row | cell cell cell
+    (row-header)
+
 */
 
 /* common */
 .time-table-row-header, .time-table-cell, .time-table-col-header{
-    padding: 0 10px;
+
 }
 
 /* time table */
@@ -27,6 +33,7 @@
 .time-table-grid{
     background-color: transparent;
     height:1px;
+    line-height: 0px;
 }
 .time-table-grid .time-table-cell{
     box-sizing: border-box;
@@ -37,6 +44,7 @@
 .time-table-row{
     border-bottom:1px solid black;
     height:1px;
+    line-height: 0px;
 }
 .time-table-row-header {
     text-align:right;

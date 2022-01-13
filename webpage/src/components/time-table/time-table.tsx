@@ -8,20 +8,19 @@ const TimeTable:React.FC<TimeTableProps> = ({
     rowGrid,
     columns,
     rows,
-    height,
-    width,
     blockMap,
     usedTime,
-    onDoubleClick,
+    onDoubleClickGrid,
     onDropBlock,
-    onDragStartBlock
+    onDragStartBlock,
+    ...props
 }) => {
     const [origCol, setOrigCol] = useState<number>(0);
     const [origRow, setOrigRow] = useState<number>(0);
 
     const addBlock = (row:number, col:number) => {
-        if(onDoubleClick)
-            onDoubleClick(row, col);
+        if(onDoubleClickGrid)
+            onDoubleClickGrid(row, col);
     }
 
     const handleDragStart = (e:React.DragEvent, row:number, col:number) => {
@@ -40,7 +39,7 @@ const TimeTable:React.FC<TimeTableProps> = ({
     return (
         <table 
             className='time-table-container'
-            style={{height:height, width:width}}
+            {...props}
         >   
             <thead>
                 <tr>
@@ -84,7 +83,7 @@ const TimeTable:React.FC<TimeTableProps> = ({
                                 }
     
                                 {/* draw other columns */}
-                                {columns.map((val, col) => {
+                                {columns.map((colVal, col) => {
                                     return (
                                         blockMap[row] && blockMap[row][col]?
                                             React.cloneElement(blockMap[row][col], {
@@ -93,7 +92,7 @@ const TimeTable:React.FC<TimeTableProps> = ({
                                             :
                                             usedTime[col] === undefined || usedTime[col][row] === undefined || usedTime[col][row] === 0?
                                             <td 
-                                                {...val.cell}
+                                                {...colVal.cell}
                                                 {...rowVal.grid}
                                                 className={'time-table-cell'}
                                                 onDragOver={(e)=>{
@@ -106,6 +105,9 @@ const TimeTable:React.FC<TimeTableProps> = ({
                                             :undefined
                                     )
                                 })}
+                                
+                                {/* dummy for maintaining same height */}
+                                <td style={{width:0}}/>
                             </tr>
                         )
                     })

@@ -1,14 +1,54 @@
+/*  structure...
+    
+    table :        col  col  col  (col-header)
+                -----------------
+            row | cell cell cell
+            row | cell cell cell
+            row | cell cell cell
+    (row-header)
+
+*/
+
+/* common */
+.time-table-row-header, .time-table-cell, .time-table-col-header{
+
+}
+
+/* time table */
 .time-table-container {
     position:relative;
-    display:flex;
-    flex-direction: row;
+    border-collapse: collapse;
+}
+.time-table-container thead tr {
+    box-sizing: border-box;
+    border-bottom:1px outset black;
 }
 
-.time-table-column {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+/* time table col */
+.time-table-col-header {
+    text-align: center;
 }
 
-.time-table-cell:nth-child(odd) {
-    background-color: #CCCCCC;
+/* time table grid */
+.time-table-grid{
+    background-color: transparent;
+    height:1px;
+    line-height: 0px;
+}
+.time-table-grid .time-table-cell{
+    box-sizing: border-box;
+    background-color: transparent;
+}
+
+/* time table row */
+.time-table-row{
+    border-bottom:1px solid black;
+    height:1px;
+    line-height: 0px;
+}
+.time-table-row-header {
+    text-align:right;
+}
+.time-table-row .time-table-cell{
+    box-sizing: border-box;
 }

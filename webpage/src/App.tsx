@@ -1,5 +1,5 @@
 import './App.css';
-import { Block} from './components/block/block';
+import { Block } from './components/block/block';
 import {TimeTable} from './components/time-table/time-table'
 import { useBlock } from './hooks/useBlock';
 
@@ -15,9 +15,7 @@ function App() {
   return (
     <div>
       <TimeTable
-        rowGrid={20}
-        height={800}
-        width={800}
+        rowGrid={4}
         rows={[
           {
             key:'1:00',
@@ -36,7 +34,7 @@ function App() {
           {
             key:'monday',
             header: {
-              width:'200'
+              width:'200',
             }
           },
           {
@@ -57,15 +55,22 @@ function App() {
               width:'200'
             }
           },
+          {
+            key:'friday',
+            header: {
+              width:'200'
+            }
+          },
         ]}
         blockMap={blockMap}
         usedTime={usedTime}
-        onDoubleClick={(row, col) => {
-          createBlock(row, col, <Block key={row+' '+col} height={24} style={{backgroundColor:'#'+Math.floor(Math.random()*16777215).toString(16)}}/>)
+        onDoubleClickGrid={(row, col) => {
+          createBlock(row, col, <Block key={row+' '+col} height={3} style={{backgroundColor:'#'+Math.floor(Math.random()*16777215).toString(16)}}/>)
         }}
         onDropBlock={(row, col, newRow, newCol)=> {
           moveBlock(row, col, newRow, newCol);
         }}
+        style={{height:800}}
       />
     </div>
   );

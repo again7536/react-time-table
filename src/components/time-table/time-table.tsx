@@ -1,53 +1,121 @@
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 
 import { TimeTableProps } from 'src/types/time-table';
 
 import './time-table.css';
 
 const TimeTable:React.FC<TimeTableProps> = ({
-    timeGrid,
+    rowGrid,
     columns,
-    height,
-    width
+    rows,
+    blockMap,
+    usedTime,
+    onDoubleClickGrid,
+    onDropBlock,
+    onDragStartBlock,
+    ...props
 }) => {
-    const timeCount = 24 * 60 / timeGrid;
-    const timeGridLine = useMemo<number[]>(() => {
-        let ret = [];
-        for(let i=0;i<timeCount;i++)
-            ret.push(timeGrid * i);
-        
-        return ret;
-    }, [timeGrid])
+    const [origCol, setOrigCol] = useState<number>(0);
+    const [origRow, setOrigRow] = useState<number>(0);
+
+    const addBlock = (row:number, col:number) => {
+        if(onDoubleClickGrid)
+            onDoubleClickGrid(row, col);
+    }
+
+    const handleDragStart = (e:React.DragEvent, row:number, col:number) => {
+        setOrigRow(row);
+        setOrigCol(col);
+        if(onDragStartBlock)
+            onDragStartBlock(row, col);
+    }
+
+    const handleDrop = (e:React.DragEvent, row:number, col:number) => {
+        e.preventDefault();
+        if(onDropBlock)
+            onDropBlock(origRow, origCol, row, col);
+    }
 
     return (
-        <div 
+        <table 
             className='time-table-container'
-            style={{height:height, width:width}}
-        >
-            <div className='time-table-column'>
-                <div className='time-table-header'/>
+            {...props}
+        >   
+            <thead>
+                <tr>
+                    <th className='time-table-col-header'></th>
+                    {columns.map((val) => {
+                        return (
+                            <th 
+                                {...val.header}
+                                key={val.key}
+                                className={val.header?.className? val.header.className+' time-table-col-header':'time-table-col-header'}
+                            >
+                                {val.key}
+                            </th>
+                        )
+                    })}
+                </tr>
+            </thead>
+            <tbody>
+                {rows.map((rowVal, rowIdx, arr) => 
+                <React.Fragment key={rowIdx}>
                 {
-                    timeGridLine.map((val, idx, arr)=> {
-                        <div className='time-table-cell'>
-                            {`${val/60}:${val%60}`}
-                        </div>
+                    [...Array(rowGrid)].map((gridVal, gridIdx)=> {
+                        const row = rowIdx * rowGrid + gridIdx;
+                        const header = gridIdx === 0;
+                        const lined = gridIdx === rowGrid -1;
+                        return (
+                            <tr 
+                                key={`${row}-row`} 
+                                className={lined?'time-table-row':'time-table-grid'}
+                            >
+                                {
+                                    header?
+                                    <td // first column
+                                        {...rowVal.header}
+                                        className={'time-table-row-header'}
+                                        rowSpan={rowGrid}
+                                    >
+                                        {rowVal.key}
+                                    </td>
+                                    :undefined
+                                }
+    
+                                {/* draw other columns */}
+                                {columns.map((colVal, col) => {
+                                    return (
+                                        blockMap[row] && blockMap[row][col]?
+                                            React.cloneElement(blockMap[row][col], {
+                                                onDragStart: (e:React.DragEvent<HTMLTableCellElement>)=>handleDragStart(e, row, col),
+                                            })
+                                            :
+                                            usedTime[col] === undefined || usedTime[col][row] === undefined || usedTime[col][row] === 0?
+                                            <td 
+                                                {...colVal.cell}
+                                                {...rowVal.grid}
+                                                className={'time-table-cell'}
+                                                onDragOver={(e)=>{
+                                                    e.preventDefault();
+                                                }}
+                                                onDrop={(e)=>handleDrop(e, row, col)}
+                                                onDoubleClick={()=>addBlock(row, col)}
+                                                key={`${row}-${col}-cell`} 
+                                            />
+                                            :undefined
+                                    )
+                                })}
+                                
+                                {/* dummy for maintaining same height */}
+                                <td style={{width:0}}/>
+                            </tr>
+                        )
                     })
                 }
-            </div>
-            {
-                columns.map((val, idx, arr) => {
-                    <div className='time-table-column' key={val.key}>
-                        <div className='time-table-header'>{val.key}</div>
-                        {
-                            timeGridLine.map((val, idx, arr)=> {
-                                <div className='time-table-cell'>
-                                </div>
-                            })
-                        }
-                    </div>
-                })
-            }
-        </div>
+                </React.Fragment>
+                )}
+            </tbody>
+        </table>
     )
 }
 
