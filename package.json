@@ -39,11 +39,11 @@
   "scripts": {
     "prepare": "ts-patch install -s",
     "check-types": "tsc",
-    "build": "tsc"
+    "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "version": "1.0.4"
+  "version": "1.0.5"
 }
