@@ -9,46 +9,41 @@
 
 */
 
-/* common */
-.time-table-row-header, .time-table-cell, .time-table-col-header{
-
-}
-
 /* time table */
-.time-table-container {
+.timeTableContainer {
     position:relative;
     border-collapse: collapse;
 }
-.time-table-container thead tr {
+.timeTableContainer thead tr {
     box-sizing: border-box;
     border-bottom:1px outset black;
 }
 
 /* time table col */
-.time-table-col-header {
+.timeTableColHeader {
     text-align: center;
 }
 
 /* time table grid */
-.time-table-grid{
+.timeTableGrid{
     background-color: transparent;
     height:1px;
     line-height: 0px;
 }
-.time-table-grid .time-table-cell{
+.timeTableGrid .timeTableCell{
     box-sizing: border-box;
     background-color: transparent;
 }
 
 /* time table row */
-.time-table-row{
+.timeTableRow{
     border-bottom:1px solid black;
     height:1px;
     line-height: 0px;
 }
-.time-table-row-header {
+.timeTableRow-header {
     text-align:right;
 }
-.time-table-row .time-table-cell{
+.timeTableRow .timeTableCell{
     box-sizing: border-box;
 }

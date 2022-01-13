@@ -1,9 +1,5 @@
 import {useState} from 'react';
-import { TableBlock, TableBlockMap } from 'src/types/time-table';
-
-interface UseBlockProps {
-    initialBlockMap?: TableBlockMap
-}
+import { TableBlock, TableBlockMap, UseBlockProps } from 'src/types/index';
 
 const useBlock = ({initialBlockMap}:UseBlockProps) => {
     const [blockMap, setBlockMap] = useState<TableBlockMap>(initialBlockMap?initialBlockMap:{});

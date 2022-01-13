@@ -1,5 +1,5 @@
 import React, { ForwardedRef } from 'react';
-import { TableBlockProps } from "src/types/time-table";
+import { TableBlockProps } from "src/types/index";
 
 const Block:React.FC<TableBlockProps>=({
     height, 

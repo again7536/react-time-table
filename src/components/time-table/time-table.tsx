@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { TimeTableProps } from 'src/types/time-table';
+import { TimeTableProps } from 'src/types/index';
 
-import './time-table.css';
+import style from './time-table.module.css';
 
 const TimeTable:React.FC<TimeTableProps> = ({
     rowGrid,
@@ -38,7 +38,7 @@ const TimeTable:React.FC<TimeTableProps> = ({
 
     return (
         <table 
-            className='time-table-container'
+            className={style.timeTableContainer}
             {...props}
         >   
             <thead>
@@ -49,7 +49,7 @@ const TimeTable:React.FC<TimeTableProps> = ({
                             <th 
                                 {...val.header}
                                 key={val.key}
-                                className={val.header?.className? val.header.className+' time-table-col-header':'time-table-col-header'}
+                                className={style.timeTableColHeader}
                             >
                                 {val.key}
                             </th>
@@ -68,13 +68,12 @@ const TimeTable:React.FC<TimeTableProps> = ({
                         return (
                             <tr 
                                 key={`${row}-row`} 
-                                className={lined?'time-table-row':'time-table-grid'}
+                                className={lined?style.timeTableRow:style.timeTableGrid}
                             >
                                 {
                                     header?
                                     <td // first column
                                         {...rowVal.header}
-                                        className={'time-table-row-header'}
                                         rowSpan={rowGrid}
                                     >
                                         {rowVal.key}
@@ -94,7 +93,7 @@ const TimeTable:React.FC<TimeTableProps> = ({
                                             <td 
                                                 {...colVal.cell}
                                                 {...rowVal.grid}
-                                                className={'time-table-cell'}
+                                                className={style.timeTableCell}
                                                 onDragOver={(e)=>{
                                                     e.preventDefault();
                                                 }}

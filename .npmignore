@@ -12,3 +12,7 @@ webpage
 # GIT
 .git
 .gitignore
+
+# webpack
+.babelrc
+rollup.config.js

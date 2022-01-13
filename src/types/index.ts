@@ -41,3 +41,8 @@ export interface TimeTableProps extends React.TableHTMLAttributes<HTMLTableEleme
     onDropBlock?:(row:number, col:number, newRow:number, newColumn:number)=>void;
     onDragStartBlock?:(row:number, col:number)=>void,
 }
+
+/* hook props */
+export interface UseBlockProps {
+    initialBlockMap?: TableBlockMap
+}
